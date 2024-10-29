@@ -2,7 +2,7 @@ body {
           margin:0;
 
         }
-.montserrat-300 {
+.montserrat-container {
   font-family: "Montserrat", serif;
   font-optical-sizing: auto;
   font-weight: 300;
