@@ -2,12 +2,14 @@ body {
           margin:0;
 
         }
-.montserrat-container {
-  font-family: "Montserrat", serif;
+
+.montserrat .container {
+  font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;
 }
+
         .container {
             background-color:  rgb(0, 38, 51) ;
             background-size: cover;
