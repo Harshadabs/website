@@ -271,8 +271,18 @@ nav a {
   border-bottom: 20px solid #f0f0f0;
   margin-bottom: -10px;
 }
+@media (max-width: 1050px) {
+  width: 48%;
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr); /* Set 2x2 grid */
+    gap: 10px;
+  }
 
-@media (max-width: 480px) {
+  .grid-container > .pass {
+    grid-column: span 2; /* Make items with "pass" class span full width (1x1) */
+  }
+}
+@media (max-width: 600px) {
   .grid-container {
     grid-template-columns: repeat(2, 1fr); /* Set 2x2 grid */
     gap: 10px;
