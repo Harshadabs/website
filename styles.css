@@ -272,7 +272,7 @@ nav a {
   margin-bottom: -10px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1080px) {
   .grid-container {
     grid-template-columns: repeat(2, 1fr); /* Set 2x2 grid */
     gap: 10px;
