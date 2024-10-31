@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genshin Impact</title>
+    <style>
+ body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #2c2c2c; /* Dark background */
+    margin: 0;
+    padding: 0;
+        }
+/* General Container */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #222;
+  color: white;
+}
+.sidebar {
+    flex: 1;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.instructions h3 {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.instructions ol {
+    font-size: 14px;
+    color: #aaa;
+}
+.right-content {
+    flex: 2;
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+}
+/* Section Titles */
+.section h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* Input Row */
+.input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.input-box {
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+}
+
+/* Instruction Text */
+.instruction {
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* Grid Layout for Service Selection */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+/* Item Box */
+.item {
+  background-color: #333;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.item:hover {
+  border-color: #666;
+}
+
+.item.active {
+  background-color: #e7a900;
+  color: black;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+}
+
+    </style>
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="section">
+          <h3>1.) Input Data Game</h3>
+          <div class="input-row">
+            <input type="number" placeholder="Input User ID" class="input-box">
+            <select class="input-box" >
+            <option>Select Server</option>
+              <option>Asia</option>
+              <option>Europe</option>
+              <option>America</option>
+              <option>Tw,Hk,Mo</option>
+            </select>
+                <div class="sidebar">
+        <img src="photos/Genshin Impact Logo.jpeg" alt="Genshin Impact" width="200px" class="game-image">
+        <div class="instructions">
+            <h3>How to Top Up the cheapest Genshin Impact Genesis Crystal:</h3>
+            <ol>
+                <li>Enter ID & Server</li>
+                <li>Select Item</li>
+                <li>Select Payment</li>
+                <li>Enter WhatsApp No</li>
+                <li>Click Confirm Top Up & make Payment</li>
+                <li>Genesis Crystal is automatically logged into the game account</li>
+            </ol>
+        </div>
+    </div>
+        </div>
+          <p class="instruction">
+            Please enter your User ID & Server and make sure it is correct. Example: 123456789|server-asia.
+          </p>
+        </div>
+      
+        <div class="section">
+          <h3>2.) Select Service Amount</h3>
+          <div class="grid">
+            <div class="item">Welkin Moon 1X<br>INR 375</div>
+            <div class="item">60 Crystals<br>INR 79</div>
+            <div class="item">980+110 Crystals<br>INR 1,200</div>
+            <div class="item">300+30 Crystals<br>INR 380</div>
+            <div class="item">1980+260 Crystals<br>INR 2,500</div>
+            <div class="item">3280+600 Crystals<br>INR 3,799</div>
+            <div class="item">6480+1600 Crystals<br>INR 7,499</div>
+            <div class="item">Blessing Welkin Moon x 2<br>INR 760</div>
+            <div class="item">Blessing Welkin Moon x 3<br>INR 1,140</div>
+            <div class="item">Blessing Welkin Moon x 4<br>INR 1,520</div>
+            <div class="item">Blessing Welkin Moon x 5<br>INR 1,900</div>
+          </div>
+        </div>
+      </div>
+      <script>
+        document.querySelectorAll('.item').forEach(function (item) {
+          item.addEventListener('click', function () {
+            document.querySelectorAll('.item').forEach(function (i) {
+              i.classList.remove('active');
+            });
+            this.classList.add('active');
+          });
+        });
+      </script>
+</body>
+</html>
