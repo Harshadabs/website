@@ -24,16 +24,6 @@ body {
   padding: 10px 0;
   z-index: 100;
 }
-
-.container {
-  background-color: rgb(0, 38, 51);
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
 header {
   display: flex;
   justify-content: space-between;
@@ -62,6 +52,16 @@ nav a {
   background-color: #555;
   border-radius: 5px;
 }
+
+.container {
+  background-color: rgb(0, 38, 51);
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 
 
 .login-signup {
@@ -259,7 +259,7 @@ nav a {
 /* Hover effect for grid items */
 .grid-item:hover {
   transform: scale(1.05);
-  border-color: #ffd700;
+  border-color:#00eaff;
 }
 
 /* Image styling within the grid item */
@@ -322,13 +322,7 @@ nav a {
 
 
 @media (max-width: 1050px) {
- .section-left, .section-right {
-    width: 100%; /* Ensure both sections take up full width */
-    text-align: center;
-    margin: 0 auto 1rem auto; /* Center-align sections */
-    padding: 0; /* Remove padding */
-  }
-
+  
     div{
         align-items: center;
         justify-content: center; /* Center content horizontally */
@@ -349,13 +343,15 @@ nav a {
     padding: 5px;
   }
 
-  .grid {
+  .grid-containerx {
     grid-template-columns: repeat(2, 1fr);
   }
 
   .input-row {
     flex-direction: column;
   }
+
+
 }
 
 .input-row {
@@ -375,7 +371,7 @@ nav a {
 /* Instruction Text */
 .instruction {
   font-size: 12px;
-  color: #aaa;
+  color: #000000;
 }
 
 .instructions h3 {
@@ -385,11 +381,11 @@ nav a {
 
 .instructions ol {
   font-size: 14px;
-  color: #aaa;
+  color: #000000;
 }
 .right-content {
   flex: 2;
-  background-color: #222;
+  background-color: #ffffff;
   padding: 20px;
   border-radius: 10px;
 }
