@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="game page.css">
     <title>Genshin Impact</title>
 </head>
 <body>
 
 
-    <div class="container">
+    <div class="nav-container">
       <header>
         <div class="logo">ArconHUB</div>
         <nav>
@@ -19,6 +19,8 @@
         <a href="login.html" class="login-signup">LOGIN / SIGN UP</a>
       </nav>  
     </header>
+    </div>
+    <div class="container">
         <div class="section">
           <h3>1.) Input Data Game</h3>
           <div class="input-row">
@@ -36,7 +38,7 @@
             <h3>How to Top Up the cheapest Genshin Impact Genesis Crystal:</h3>
             <ol>
                 <li>Enter ID & Server</li>
-                <li>Select Item</li>
+                <li>Select grid-item</li>
                 <li>Select Payment</li>
                 <li>Enter WhatsApp No</li>
                 <li>Click Confirm Top Up & make Payment</li>
@@ -50,32 +52,102 @@
           </p>
         </div>
       
-        <div class="section">
+        
           <h3>2.) Select Service Amount</h3>
-          <div class="grid">
-            <div class="item">Welkin Moon 1X<br>INR 375</div>
-            <div class="item">60 Crystals<br>INR 79</div>
-            <div class="item">980+110 Crystals<br>INR 1,200</div>
-            <div class="item">300+30 Crystals<br>INR 380</div>
-            <div class="item">1980+260 Crystals<br>INR 2,500</div>
-            <div class="item">3280+600 Crystals<br>INR 3,799</div>
-            <div class="item">6480+1600 Crystals<br>INR 7,499</div>
-            <div class="item">Blessing Welkin Moon x 2<br>INR 760</div>
-            <div class="item">Blessing Welkin Moon x 3<br>INR 1,140</div>
-            <div class="item">Blessing Welkin Moon x 4<br>INR 1,520</div>
-            <div class="item">Blessing Welkin Moon x 5<br>INR 1,900</div>
-          </div>
+          
+            <div class="Items grid-container">
+
+              <button class="box grid-item">
+                <a href="#" class="Item__link">
+                  <div class="product-container" style="display: block;">
+                    <img src="photo scroll/Item_Genesis_Crystal.webp" alt="#" class="Image";>
+                  <span class="Item__title"> 60 </span>
+                </div>
+                  <span class="Item__price">₹ 80</span>
+                
+                </a>
+              </button>
+          
+            
+              <button class="box grid-item">
+                <a href="#" class="Item__link">
+                  <div class="product-container" style="display: block;">
+                    <img src="photo scroll/Item_Genesis_Crystal.webp" alt="#" class="Image";>
+                  <span class="Item__title"> 330</span>
+                </div>
+                  <span class="Item__price">₹ 390</span>
+                
+                </a>
+              </button>
+  
+              <button class="box grid-item">
+                <a href="#" class="Item__link">
+                  <div class="product-container" style="display: block;">
+                    <img src="photo scroll/Item_Genesis_Crystal.webp" alt="#" class="Image";>
+                  <span class="Item__title"> 1090</span>
+                </div>
+                  <span class="Item__price">₹ 1140</span>
+                
+                </a>
+              </button>
+  
+              <button class="box grid-item">
+                <a href="#" class="Item__link">
+                  <div class="product-container" style="display: block;">
+                    <img src="photo scroll/Item_Genesis_Crystal.webp" alt="#" class="Image";>
+                  <span class="Item__title"> 2240</span>
+                </div>
+                  <span class="Item__price">₹ 2450</span>
+                
+                </a>
+              </button>
+  
+              <button class="box grid-item">
+                <a href="#" class="Item__link">
+                  <div class="product-container" style="display: block;">
+                    <img src="photo scroll/Item_Genesis_Crystal.webp" alt="#" class="Image";>
+                  <span class="Item__title"> 3880</span>
+                </div>
+                  <span class="Item__price">₹ 3750</span>
+                
+                </a>
+              </button>
+  
+              <button class="box grid-item">
+                <a href="#" class="Item__link">
+                  <div class="product-container" style="display: block;">
+                    <img src="photo scroll/Item_Genesis_Crystal.webp" alt="#" class="Image";>
+                  <span class="Item__title"> 8080</span>
+                </div>
+                  <span class="Item__price">₹ 7500</span>
+                
+                </a>
+              </button>
+  
+              <button class="box grid-item">
+                <a href="#" class="Item__link">
+                  <div class="product-container" style="display: block;">
+                    <img src="photo scroll/srnhhu9cip971.webp" alt="#" class="Image";>
+                  <span class="Item__title"> welkin moons</span>
+                </div>
+                  <span class="Item__price">₹ 379</span>
+                
+                </a>
+              </button>
         </div>
-      </div>
+      
+    </div>
+  </body>
       <script>
-        document.querySelectorAll('.item').forEach(function (item) {
-          item.addEventListener('click', function () {
-            document.querySelectorAll('.item').forEach(function (i) {
-              i.classList.remove('active');
-            });
-            this.classList.add('active');
-          });
-        });
-      </script>
-</body>
+      
+document.querySelectorAll('.grid-item').forEach(item => {
+    item.addEventListener('click', function() {
+        // Remove active class from all grid items
+        document.querySelectorAll('.grid-item').forEach(el => el.classList.remove('active'));
+
+        // Add active class to the clicked item
+        this.classList.add('active');
+    });
+});
+</script>
 </html>
