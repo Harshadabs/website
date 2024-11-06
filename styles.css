@@ -57,7 +57,6 @@ nav a {
   background-color: rgb(0, 38, 51);
   background-size: cover;
   background-position: center;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
