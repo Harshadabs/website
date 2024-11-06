@@ -299,7 +299,7 @@ nav a {
 }
 
 /* Responsive adjustments */
-@media (max-width: 1024px) {
+@media (max-width: 1050px) {
   .grid-container-home {
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
@@ -308,20 +308,11 @@ nav a {
   .Item__price {
     font-size: 16px;
   }
-}
+  .image {
+    width: 100px;
+    height: 100px;
+    
 
-@media (max-width: 600px) {
-  .grid-container-home {
-    grid-template-columns: 1fr;
-  }
-
-  .Item__price {
-    font-size: 14px;
-  }
-}
-
-
-@media (max-width: 1050px) {
   
     div{
         align-items: center;
