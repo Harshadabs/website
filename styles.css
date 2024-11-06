@@ -3,6 +3,7 @@ body {
   font-family: "Montserrat", sans-serif;
   align-items: center;
   justify-content: center;
+  background-color: #008080;
 }
 
 ::-webkit-scrollbar {
@@ -54,7 +55,6 @@ nav a {
 }
 
 .container {
-  background-color: rgb(0, 38, 51);
   background-size: cover;
   background-position: center;
   display: flex;
@@ -226,8 +226,7 @@ nav a {
   display: grid;
   grid-template-columns: repeat(5, 7fr);
   gap: 1rem;
-  padding: 1rem;
-  
+  padding: 1rem; 
 }
 
 /* Container styling */
@@ -304,14 +303,23 @@ nav a {
     gap: 15px;
   }
 
-  .Item__price {
-    font-size: 16px;
+  .slideshow-container{
+    max-width: 360px;
+  }
+
+  .card , .grid-item{
+padding: 10px;
+  }
+
+  .Item__price, .Item__link{
+    font-size: 12px;
   }
   .image {
     width: 100px;
     height: 100px;
   } 
 
+  .Item__link 
   
     div{
         align-items: center;
@@ -333,7 +341,7 @@ nav a {
     padding: 5px;
   }
 
-  .grid-containerx {
+  .grid-container {
     grid-template-columns: repeat(2, 1fr);
   }
 
