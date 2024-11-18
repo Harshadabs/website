@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArconHUB</title>
+    <link rel="stylesheet" href="static\css\game page.css">
+</head>
+<body>
+  
+  <div class="nav-container ">
+    <header>
+    <div class="logo">ArconHUB</div>
+    <nav>
+      <a href='/'>Home</a>
+  </nav>
+  <button class="login-signup" onclick="location.href='login.html'">Login / Sign In</button>
+  </header>
+  </div>
+  
+<div class="container ">
+    <h1 style="color: white;text-align: center;">LOGIN AND SERVER ID RECHARGE</h1>
+    <div class="section container ">
+          <h3>1.) Input Data Game</h3>
+          <div class="input-row" >
+            <input type="number" placeholder="Input User ID" class="input-box">
+            <input type="number" placeholder="Input Server ID" class="input-box">
+                <div class="sidebar " style="margin-right:10em ;">
+        <img src="static/images/mobile legends.png" alt="Mobile Legends" width="200px" class="game-image">
+        <div class="instructions">
+            <h3>How to Top Up the cheapest Genshin Impact Genesis Crystal:</h3>
+            <ol>
+                <li>Enter ID & Server</li>
+                <li>Select Item</li>
+                <li>Select Payment</li>
+                <li>Click Confirm Top Up & make Payment</li>
+                <li>diamonds will automatically be recharged into the game account</li>
+            </ol>
+        </div>
+    </div>
+        </div>
+          <p class="instruction">
+            Please enter your User ID & Server and make sure it is correct. Example: 123456789|server-asia.
+          </p>
+          <div class="Items grid-container">
+
+            {% for package in packages %}
+                <button class="box grid-item" onclick="selectItem('{{ package.title }}')">
+                    <a href="#" class="Item__link">
+                        <div class="product-container" style="display: block;">
+                            <img src="static/images/dimond.png" alt="#" class="Image">
+                            <span class="Item__title">{{ package.title }}</span>
+                        </div>
+                        <span class="Item__price">{{ package.price }}</span>
+                    </a>
+                </button>
+                {% endfor %}
+            <button class="box grid-item pass">
+              <a href="#" class="Item__link">
+                <div class="product-container" style="display: block;">
+                <span class="Item__title"> Weekly Diamond pass </span>
+              </div>
+                <span class="Item__price">₹ 140</span>
+              
+              </a>
+            </button>
+
+            <button class="box grid-item pass">
+              <a href="#" class="Item__link">
+                <div class="product-container" style="display: block;">
+                <span class="Item__title"> Starlight pass</span>
+              </div>
+              <span class="Item__price">₹ 270</span>
+              
+              </a>
+            </button>
+
+            <button class="box grid-item pass ">
+              <a href="#" class="Item__link">
+                <div class="product-container" style="display: block;">
+                <span class="Item__title"> Twilight pass</span>
+              </div>
+              <span class="Item__price color_change">₹ 750</span>
+              
+              </a>
+            </button>
+          
+          </div> 
+    </div>       
+</body>
+<script>
+document.querySelectorAll('.grid-item').forEach(item => {
+    item.addEventListener('click', function() {
+        // Remove active class from all grid items
+        document.querySelectorAll('.grid-item').forEach(el => el.classList.remove('active'));
+
+        // Add active class to the clicked item
+        this.classList.add('active');
+    });
+});
+
+</script>
+</html>
