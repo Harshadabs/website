@@ -1,0 +1,501 @@
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  align-items: center;
+  justify-content: center;
+  background-color: #008080;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(255, 255, 255);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.nav-container {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #000000; /* Navbar background color */
+  padding: 10px 0;
+  z-index: 100;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Logo styling */
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+}
+
+/* Navbar link styling */
+nav {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  background-color: #555;
+  border-radius: 5px;
+}
+
+.container {
+  background-color: #008080;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.login-signup {
+  background-color: #f0ad4e;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  font-size: large;
+}
+
+.login-signup:hover {
+  background-color: #000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+.mySlides {
+  display: none;
+}
+
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.active,
+.dot:hover {
+  background-color: #717171;
+}
+
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+.ImageContainer {
+  width: 100%;
+  height: auto;
+}
+
+.Image {
+  max-width: 1.1em !important;
+}
+
+.box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  background-color: #111;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #444;
+  text-align: center;
+}
+
+.card {
+  background-color: #111;
+  border: 2px solid #444;
+  border-radius: 5px;
+  text-align: center;
+  padding: 15px;
+  margin: 10px;
+  width: 250px;
+  height: max-content;
+}
+
+
+.pass {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background-color: #111;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #444;
+  text-align: center;
+}
+
+.pass img {
+  width: 100px;
+}
+
+.pass p {
+  font-size: 1.5em;
+  margin-top: 0;
+}
+
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, 7fr);
+  gap: 1rem;
+  padding: 1rem; 
+}
+
+/* Container styling */
+.grid-container-home {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 20px;
+  margin: 0 auto;
+  background-color: #002633;
+  border-radius: 8px;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 3.9em;
+  margin-top: 2em;
+}
+
+/* Card and grid-item styling */
+.grid-item {
+  background-color: #111;
+  border: 1px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  padding: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* Hover effect for grid items */
+.grid-item:hover {
+  transform: scale(1.05);
+  border-color:#00eaff;
+}
+
+/* Image styling within the grid item */
+.grid-item .product-container {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect for images */
+.grid-item:hover .image {
+  transform: scale(1.1);
+}
+
+/* Item price text styling */
+.Item__price {
+  display: block;
+  font-size: 18px;
+  color: #ffffff;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Link styling */
+.Item__link {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1050px) {
+  .grid-container-home {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .slideshow-container{
+    max-width: 360px;
+    margin-top: 4em ;
+  }
+
+  .card , .grid-item{
+padding: 10px;
+  }
+
+  .Item__price, .Item__link{
+    font-size: 12px;
+  }
+  .image {
+    width: 100px;
+    height: 100px;
+  } 
+
+  .Item__link 
+  
+    div{
+        align-items: center;
+        justify-content: center; /* Center content horizontally */
+        align-items: center; /* Center content vertically */
+        
+    }
+  .pass {
+    grid-column: span 1;
+    width: 100%;
+  }
+
+  .Image {
+    max-width: 0.8em !important;
+  }
+
+  .login-signup,
+  nav a {
+    padding: 5px;
+  }
+
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+
+
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.input-box {
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+}
+
+/* Instruction Text */
+.instruction {
+  font-size: 12px;
+  color: #000000;
+}
+
+.instructions h3 {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.instructions ol {
+  font-size: 14px;
+  color: #000000;
+}
+.right-content {
+  flex: 2;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+}
+/* Section Titles */
+.section h3 {
+font-size: 20px;
+margin-bottom: 10px;
+margin-right: 10em;
+}
+
+/* Center the login form container */
+.login-form-container {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: 80px auto;
+  color: #fff;
+  text-align: center;
+}
+
+/* Heading */
+.login-form-container h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Input fields */
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 20px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #222;
+  color: #fff;
+}
+
+.login-signup {
+  background-color: #f0ad4e;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: large;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-signup:hover {
+  background-color: #ffa726;
+}
+
+.login-signup {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.login-signup:hover {
+  color: #000;
+}
+
+.login-button:focus,
+.login-signup:focus,
+.next:focus,
+.prev:focus {
+  outline: 2px solid #f0ad4e;
+}
+
+.item,
+.dot,
+.login-button {
+  transition: all 0.3s ease;
+}
+
+.login-signup-page{
+  display: inline-block;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+  margin-top: 10px;
+  width: 100%;
+  padding: 12px;
+  background-color: #f0ad4e;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tag {
+  background-color: #000;
+  color: #fff;
+  border-radius: 10%;
+  margin-top: 5px;
+  font-size: 1.4em;
+  display: inline-block;
+  padding-left: 8px;
+  padding-right: 8px;
+  text-align: center;
+}
+.display-topleft {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
