@@ -3,18 +3,17 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# Initialize the database
 db = SQLAlchemy(app)
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(200), nullable=False)
+from routes import *
 
+# Create the tables
+with app.app_context():
+    db.create_all()
 
 @app.route('/')
 def index():
@@ -80,30 +79,41 @@ Genesis_packages = [
 def log():
     return render_template('login.html')
 
-@app.route('/signup', methods=['GET', 'POST'])
-def signup():
-    if request.method == 'POST':
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
-
-        # Hash the password
-        hashed_password = generate_password_hash(password, method='sha256')
-
-        # Check if user already exists
-        existing_user = User.query.filter_by(username=username).first()
-        if existing_user:
-            flash('Username already exists!', 'danger')
-            return redirect(url_for('signup'))
-
-        new_user = User(username=username, email=email, password=hashed_password)
-        db.session.add(new_user)
-        db.session.commit()
-
-        flash('Signup successful! Please log in.', 'success')
-        return redirect(url_for('login'))
-
+@app.route('/sign')
+def sign():
     return render_template('signup.html')
+
+def add_user(username, email, password):
+    new_user = User(username=username, email=email, password=password)
+    db.session.add(new_user)
+    db.session.commit()
+
+
+def get_user_by_username(username):
+    return User.query.filter_by(username=username).first()
+
+
+
+@app.route('/profile')
+def profile():
+    if 'username' not in session:
+        flash('Please log in to view your profile.', 'danger')
+        return redirect(url_for('login'))
+    return render_template('profile.html', username=session['username'])
+
+@app.route('/cart')
+def cart():
+    if 'username' not in session:
+        flash('Please log in to view your cart.', 'danger')
+        return redirect(url_for('login'))
+    return render_template('cart.html')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    flash('You have been logged out.', 'success')
+    return redirect(url_for('home'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)

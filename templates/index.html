@@ -16,10 +16,21 @@
       <header>
         <div class="logo">ArconHUB</div>
         <nav>
-            <a href='/'>HOME</a>
+            <a href='/home'>HOME</a>
         </nav>
         <nav>
-        <a href="/log" class="login-signup">LOGIN / SIGN UP</a>
+      {% if session.get('username') %}
+      <div class="dropdown">
+          <button class="dropbtn">Hi, {{ session['username'] }}</button>
+          <div class="dropdown-content">
+              <a href="/profile">Profile</a>
+              <a href="/cart">Cart</a>
+              <a href="/logout">Logout</a>
+          </div>
+      </div>
+  {% else %}
+      <a href="/log" class="login-signup">LOGIN / SIGNUP</a>
+  {% endif %}
       </nav>  
     </header>
     </div>
