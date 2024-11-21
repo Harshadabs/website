@@ -3,7 +3,7 @@ body {
   font-family: "Montserrat", sans-serif;
   align-items: center;
   justify-content: center;
-  background-color: #008080;
+  background-color:  #14213D;
 }
 
 ::-webkit-scrollbar {
@@ -55,7 +55,7 @@ nav a {
 }
 
 .container {
-  background-color: #008080;
+  background-color: #14213D;
   background-size: cover;
   background-position: center;
   display: flex;
@@ -237,7 +237,7 @@ nav a {
   gap: 20px;
   padding: 20px;
   margin: 0 auto;
-  background-color: #002633;
+  background-color:#FCA311;
   border-radius: 8px;
   border-radius: 5px;
   text-align: center;

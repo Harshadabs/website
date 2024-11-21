@@ -6,7 +6,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #0e4d64; /* Background color for the page */
+  background-color:  #14213D; /* Background color for the page */
   color: #ffffff;
 }
 
@@ -98,6 +98,7 @@ nav a {
 
 /* Input fields */
 .login-form-container input[type="email"],
+.login-form-container input[type="username"],
 .login-form-container input[type="password"] {
   width: 100%;
   padding: 12px;

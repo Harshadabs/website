@@ -8,7 +8,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #002633;
+  background-color: #14213D;
 }
 ::-webkit-scrollbar {
   width: 10px;
@@ -55,7 +55,7 @@ nav a {
 
 /* Container Styling */
 .container {
-  background-color: #002633;
+  background-color:  #14213D;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -85,7 +85,7 @@ a {
   gap: 20px;
   padding: 20px;
   margin: 0 auto;
-  background-color: #002633;
+  background-color: #FCA311;
   border-radius: 5px;
 }
 .grid-item {

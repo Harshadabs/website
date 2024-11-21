@@ -1,6 +1,20 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(200), nullable=False)
+
 
 @app.route('/')
 def index():
@@ -51,6 +65,7 @@ shards_packages = [
 @app.route('/GenshinImpact')
 def GenshinImpact():
     return render_template('genshin.html', packages=Genesis_packages)
+
 Genesis_packages = [
         {"title": "60", "price": "₹ 80"},
         {"title": "330", "price": "₹ 390"},
@@ -60,37 +75,34 @@ Genesis_packages = [
         {"title": "8080", "price": "₹ 7500"},
     ]
 
-@app.route('/login', methods=['POST'])
-def login():
-    # Extract form data
-    username = request.form.get('username')
-    password = request.form.get('password')
 
-    # Check if username exists in the database
-    user = users_collection.find_one({"username": username})
-
-    if user:
-        # Verify the password using bcrypt
-        if bcrypt.check_password_hash(user['password'], password):
-            # Successful login
-            session['username'] = username
-            flash('Login successful!', 'success')
-            return redirect(url_for('dashboard'))
-        else:
-            # Incorrect password
-            flash('Invalid password. Please try again.', 'danger')
-    else:
-        # Username not found
-        flash('Username not found. Please register.', 'danger')
-
-    # Redirect to login page in case of error
-    return redirect(url_for('login'))
 @app.route('/log')
 def log():
     return render_template('login.html')
 
-@app.route('/Sign')
-def Sign():
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+
+        # Hash the password
+        hashed_password = generate_password_hash(password, method='sha256')
+
+        # Check if user already exists
+        existing_user = User.query.filter_by(username=username).first()
+        if existing_user:
+            flash('Username already exists!', 'danger')
+            return redirect(url_for('signup'))
+
+        new_user = User(username=username, email=email, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+
+        flash('Signup successful! Please log in.', 'success')
+        return redirect(url_for('login'))
+
     return render_template('signup.html')
 
 if __name__ == '__main__':
