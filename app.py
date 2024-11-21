@@ -50,8 +50,15 @@ shards_packages = [
 
 @app.route('/GenshinImpact')
 def GenshinImpact():
-    return render_template('genshin.html')
-
+    return render_template('genshin.html', packages=Genesis_packages)
+Genesis_packages = [
+        {"title": "60", "price": "₹ 80"},
+        {"title": "330", "price": "₹ 390"},
+        {"title": "1090", "price": "₹ 1140"},
+        {"title": "2240", "price": "₹ 2450"},
+        {"title": "3880", "price": "₹ 3750"},
+        {"title": "8080", "price": "₹ 7500"},
+    ]
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -81,5 +88,10 @@ def login():
 @app.route('/log')
 def log():
     return render_template('login.html')
+
+@app.route('/Sign')
+def Sign():
+    return render_template('signup.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
