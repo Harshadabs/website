@@ -1,23 +1,103 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from flask_sqlalchemy import SQLAlchemy
+import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'IHATEMONGODB'  # Required for sessions
 
-# Initialize the database
-db = SQLAlchemy(app)
+DATABASE = 'users.db'
 
-from routes import *
+# Database setup
+def init_db():
+    with sqlite3.connect(DATABASE) as conn:
+        conn.execute('''
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT UNIQUE NOT NULL,
+                password TEXT NOT NULL
+            )
+        ''')
+    print("Database initialized!")
 
-# Create the tables
-with app.app_context():
-    db.create_all()
-
+# Route: Home
 @app.route('/')
-def index():
-    return render_template('index.html')
+def home():
+    if 'user' in session:
+        return render_template('home.html', user=session['user'])
+    return redirect(url_for('login'))
+
+# Route: Login
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        with sqlite3.connect(DATABASE) as conn:
+            user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
+            if user and check_password_hash(user[2], password):
+                session['user'] = username
+                flash('Login successful!', 'success')
+                return redirect(url_for('home'))
+            else:
+                flash('Invalid username or password.', 'danger')
+
+    return render_template('login.html')
+
+# Route: Signup
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        hashed_password = generate_password_hash(password)
+
+        try:
+            with sqlite3.connect(DATABASE) as conn:
+                conn.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, hashed_password))
+                conn.commit()
+                flash('Signup successful! Please log in.', 'success')
+                return redirect(url_for('login'))
+        except sqlite3.IntegrityError:
+            flash('Username already exists.', 'danger')
+
+    return render_template('signup.html')
+
+# Route: Logout
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    flash('You have been logged out.', 'info')
+    return redirect(url_for('login'))
+
+def add_user(username, email, password):
+    hashed_password = generate_password_hash(password, method='sha256')
+    try:
+        users_collection.insert_one({
+            "username": username,
+            "email": email,
+            "password": hashed_password
+        })
+        return True
+    except Exception as e:
+        print(f"Error adding user: {e}")
+        return False
+
+def get_user_by_email(email):
+    return users_collection.find_one({"email": email})
+
+def update_user_email(current_email, new_email):
+    result = users_collection.update_one(
+        {"email": current_email},
+        {"$set": {"email": new_email}}
+    )
+    return result.modified_count > 0
+
+def delete_user(email):
+    result = users_collection.delete_one({"email": email})
+    return result.deleted_count > 0
+
+
 
 @app.route('/mobilelegends')
 def mobilelegends():
@@ -48,6 +128,9 @@ diamond_packages = [
     {"title": "9288 diamonds", "price": "₹ 10800"},
 ]
 
+@app.route('/')
+def index():
+    return render_template('index.html')
 @app.route('/Honkai')
 def Honkai():
     return render_template('honkai star rail.html', packages=shards_packages)
@@ -82,38 +165,6 @@ def log():
 @app.route('/sign')
 def sign():
     return render_template('signup.html')
-
-def add_user(username, email, password):
-    new_user = User(username=username, email=email, password=password)
-    db.session.add(new_user)
-    db.session.commit()
-
-
-def get_user_by_username(username):
-    return User.query.filter_by(username=username).first()
-
-
-
-@app.route('/profile')
-def profile():
-    if 'username' not in session:
-        flash('Please log in to view your profile.', 'danger')
-        return redirect(url_for('login'))
-    return render_template('profile.html', username=session['username'])
-
-@app.route('/cart')
-def cart():
-    if 'username' not in session:
-        flash('Please log in to view your cart.', 'danger')
-        return redirect(url_for('login'))
-    return render_template('cart.html')
-
-@app.route('/logout')
-def logout():
-    session.clear()
-    flash('You have been logged out.', 'success')
-    return redirect(url_for('home'))
-
 
 if __name__ == '__main__':
     app.run(debug=True)
