@@ -52,5 +52,34 @@ shards_packages = [
 def GenshinImpact():
     return render_template('genshin.html')
 
+
+@app.route('/login', methods=['POST'])
+def login():
+    # Extract form data
+    username = request.form.get('username')
+    password = request.form.get('password')
+
+    # Check if username exists in the database
+    user = users_collection.find_one({"username": username})
+
+    if user:
+        # Verify the password using bcrypt
+        if bcrypt.check_password_hash(user['password'], password):
+            # Successful login
+            session['username'] = username
+            flash('Login successful!', 'success')
+            return redirect(url_for('dashboard'))
+        else:
+            # Incorrect password
+            flash('Invalid password. Please try again.', 'danger')
+    else:
+        # Username not found
+        flash('Username not found. Please register.', 'danger')
+
+    # Redirect to login page in case of error
+    return redirect(url_for('login'))
+@app.route('/log')
+def log():
+    return render_template('login.html')
 if __name__ == '__main__':
     app.run(debug=True)
