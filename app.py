@@ -1,30 +1,51 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
-import sqlite3
+from flask import Flask, render_template, request, redirect, url_for, flash
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
 
 app = Flask(__name__)
-app.secret_key = 'IHATEMONGODB'  # Required for sessions
+app.secret_key = 'your_secret_key'
 
-DATABASE = 'users.db'
+# Database configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Database setup
-def init_db():
-    with sqlite3.connect(DATABASE) as conn:
-        conn.execute('''
-            CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                username TEXT UNIQUE NOT NULL,
-                password TEXT NOT NULL
-            )
-        ''')
-    print("Database initialized!")
+db = SQLAlchemy(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
 
-# Route: Home
-@app.route('/')
-def home():
-    if 'user' in session:
-        return render_template('home.html', user=session['user'])
-    return redirect(url_for('login'))
+# User model
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(150), unique=True, nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False)
+    password = db.Column(db.String(200), nullable=False)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+# Create database tables before the first request
+
+# Route: Signup
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        hashed_password = generate_password_hash(password, method='sha256')
+
+        new_user = User(username=username, email=email, password=hashed_password)
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+            flash('Signup successful! You can now log in.', 'success')
+            return redirect(url_for('login'))
+        except:
+            flash('Username or email already exists.', 'danger')
+    return render_template('signup.html')
 
 # Route: Login
 @app.route('/login', methods=['GET', 'POST'])
@@ -32,72 +53,23 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        user = User.query.filter_by(username=username).first()
 
-        with sqlite3.connect(DATABASE) as conn:
-            user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
-            if user and check_password_hash(user[2], password):
-                session['user'] = username
-                flash('Login successful!', 'success')
-                return redirect(url_for('home'))
-            else:
-                flash('Invalid username or password.', 'danger')
-
+        if user and check_password_hash(user.password, password):
+            login_user(user)
+            flash('Login successful!', 'success')
+            return redirect(url_for('index'))
+        else:
+            flash('Invalid username or password.', 'danger')
     return render_template('login.html')
-
-# Route: Signup
-@app.route('/signup', methods=['GET', 'POST'])
-def signup():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        hashed_password = generate_password_hash(password)
-
-        try:
-            with sqlite3.connect(DATABASE) as conn:
-                conn.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, hashed_password))
-                conn.commit()
-                flash('Signup successful! Please log in.', 'success')
-                return redirect(url_for('login'))
-        except sqlite3.IntegrityError:
-            flash('Username already exists.', 'danger')
-
-    return render_template('signup.html')
 
 # Route: Logout
 @app.route('/logout')
+@login_required
 def logout():
-    session.pop('user', None)
+    logout_user()
     flash('You have been logged out.', 'info')
     return redirect(url_for('login'))
-
-def add_user(username, email, password):
-    hashed_password = generate_password_hash(password, method='sha256')
-    try:
-        users_collection.insert_one({
-            "username": username,
-            "email": email,
-            "password": hashed_password
-        })
-        return True
-    except Exception as e:
-        print(f"Error adding user: {e}")
-        return False
-
-def get_user_by_email(email):
-    return users_collection.find_one({"email": email})
-
-def update_user_email(current_email, new_email):
-    result = users_collection.update_one(
-        {"email": current_email},
-        {"$set": {"email": new_email}}
-    )
-    return result.modified_count > 0
-
-def delete_user(email):
-    result = users_collection.delete_one({"email": email})
-    return result.deleted_count > 0
-
-
 
 @app.route('/mobilelegends')
 def mobilelegends():
@@ -157,14 +129,6 @@ Genesis_packages = [
         {"title": "8080", "price": "₹ 7500"},
     ]
 
-
-@app.route('/log')
-def log():
-    return render_template('login.html')
-
-@app.route('/sign')
-def sign():
-    return render_template('signup.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
