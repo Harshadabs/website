@@ -1,27 +1,21 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
-from model import db
+from flask_login import UserMixin
+
 
 # Initialize Flask and SQLAlchemy
 app = Flask(__name__)
-app.secret_key = 'T7<QE3aZ'
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'T7<QE3aZ'
 
-# Create the db object
-db = SQLAlchemy()
 
-# Initialize SQLAlchemy with the Flask app
-db.init_app(app)
-
-# Your models go here, for example:
-class User(db.Model):
+db = SQLAlchemy(app)
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(150), unique=True, nullable=False)
-    email = db.Column(db.String(150), unique=True, nullable=False)
-    password = db.Column(db.String(200), nullable=False)
+    username = db.Column(db.String(20), unique=True, nullable=False)
+    email = db.Column(db.String(200), unique=True, nullable=False)
+    password = db.Column(db.String(80), nullable=False)
 
 # Create the tables
 with app.app_context():
@@ -36,9 +30,9 @@ def signup():
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
-        hashed_password = generate_password_hash(password, method='sha256')
 
-        new_user = User(username=username, email=email, password=hashed_password)
+
+        new_user = User(username=username, email=email, password=password)
         try:
             db.session.add(new_user)
             db.session.commit()
@@ -56,7 +50,7 @@ def login():
         password = request.form['password']
         user = User.query.filter_by(username=username).first()
 
-        if user and check_password_hash(user.password, password):
+        if user(user.password, password):
             login_user(user)
             flash('Login successful!', 'success')
             return redirect(url_for('index'))
@@ -65,12 +59,6 @@ def login():
     return render_template('login.html')
 
 # Route: Logout
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    flash('You have been logged out.', 'info')
-    return redirect(url_for('login'))
 
 @app.route('/mobilelegends')
 def mobilelegends():
