@@ -1,27 +1,34 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
-
-# Initialize Flask and SQLAlchemy
+# Initialize Flask app and SQLAlchemy
 app = Flask(__name__)
-
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
 app.secret_key = 'T7<QE3aZ'
 
+# Initialize LoginManager
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'  # Name of the login route
 
+# Initialize database
 db = SQLAlchemy(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))  # Corrected: use `user_id` instead of `id`
+
+# Define the User model
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(200), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
 
-# Create the tables
+# Create database tables
 with app.app_context():
     db.create_all()
-
-# Create database tables before the first request
 
 # Route: Signup
 @app.route('/signup', methods=['GET', 'POST'])
@@ -30,17 +37,23 @@ def signup():
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
+        
+        # Check if username or email already exists
+        if User.query.filter_by(username=username).first() or User.query.filter_by(email=email).first():
+            flash('Username or email already exists!', 'danger')
+            return redirect(url_for('signup'))
 
-
+        # Directly store the plain-text password (not secure)
         new_user = User(username=username, email=email, password=password)
-        try:
-            db.session.add(new_user)
-            db.session.commit()
-            flash('Signup successful! You can now log in.', 'success')
-            return redirect(url_for('login'))
-        except:
-            flash('Username or email already exists.', 'danger')
-    return render_template('signup.html')
+        
+        # Add the new user to the database
+        db.session.add(new_user)
+        db.session.commit()
+        
+        flash('Registration successful! You can now log in.', 'success')
+        return redirect(url_for('login'))  # Redirect to login page
+    
+    return render_template('signup.html')  # Render the registration page
 
 # Route: Login
 @app.route('/login', methods=['GET', 'POST'])
@@ -48,17 +61,31 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        user = User.query.filter_by(username=username).first()
+        
+        # Query the user by username and password (plain text)
+        user = User.query.filter_by(username=username, password=password).first()
 
-        if user(user.password, password):
+        if user:  # User exists and password matches
             login_user(user)
-            flash('Login successful!', 'success')
-            return redirect(url_for('index'))
+            return redirect(url_for('profile'))  # Redirect to profile page
         else:
-            flash('Invalid username or password.', 'danger')
-    return render_template('login.html')
+            flash('Invalid username or password', 'danger')  # Feedback on failed login
+
+    return render_template('login.html')  # Render login page if GET request
+
+# Route: Profile
+@app.route('/profile')
+@login_required  # Ensure the user is logged in
+def profile():
+    return render_template('index.html', user=current_user)
 
 # Route: Logout
+@app.route('/logout')
+@login_required  # Only logged-in users can log out
+def logout():
+    logout_user()
+    flash('You have been logged out.', 'success')
+    return redirect(url_for('login'))
 
 @app.route('/mobilelegends')
 def mobilelegends():

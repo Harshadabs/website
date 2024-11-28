@@ -19,16 +19,9 @@
             <a href='/'>HOME</a>
         </nav>
         <nav>
-      {% if session.get('username') %}
-      <div class="dropdown">
-          <button class="dropbtn">Hi, {{ session['username'] }}</button>
-          <div class="dropdown-content">
-              <a href="/profile">Profile</a>
-              <a href="/cart">Cart</a>
-              <a href="/logout">Logout</a>
-          </div>
-      </div>
-  {% else %}
+          {% if current_user.is_authenticated %}
+          <li><a href="{{ url_for('logout') }}" class="login-signup">Hi, {{ current_user.username }}</a></li>
+      {% else %}
       <a href="/login" class="login-signup">LOGIN / SIGNUP</a>
   {% endif %}
       </nav>  
