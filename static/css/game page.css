@@ -56,7 +56,7 @@ nav a {
 /* Container Styling */
 .container {
   background-color:  #14213D;
-  min-height: 100vh;
+  margin-top: 35px;
   display: flex;
   flex-direction: column;
 }
@@ -217,6 +217,7 @@ footer {
   padding: 20px 0;
   bottom: 0;
   width: 100%;
+  margin-top: 20 px;
 }
 
 .footer-container {
