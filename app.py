@@ -120,6 +120,10 @@ diamond_packages = [
 def index():
     return render_template('index.html')
 
+@app.route('/about')
+def index():
+    return render_template('aboutus.html')
+
 @app.route('/Honkai')
 def Honkai():
     return render_template('honkai star rail.html', packages=shards_packages)

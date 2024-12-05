@@ -16,7 +16,7 @@
         <ul>
           <li><a href='/'>Home</a></li>
           <li><a href="#">Shop</a></li>
-          <li><a href="#">About</a></li>
+          <li><a href="/about">About</a></li>
           <li><a href="#">Contact</a></li>
           {% if current_user.is_authenticated %}
           <li><a href="{{ url_for('logout') }}" class="login-signup">Hi, {{ current_user.username }}</a></li>
