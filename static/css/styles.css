@@ -3,7 +3,7 @@ body {
   font-family: "Montserrat", sans-serif;
   align-items: center;
   justify-content: center;
-  background-color:  #14213D;
+  background-color: #208AAE;
 }
 
 ::-webkit-scrollbar {
@@ -17,20 +17,63 @@ body {
 ::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.7);
 }
-.nav-container {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: #000000; /* Navbar background color */
-  padding: 10px 0;
-  z-index: 100;
-}
+
 header {
+  background-color: #000000; /* Light gray background */
+  padding: 10px 20px;
+  border-bottom: 2px solid #ccc; /* Subtle border for header */
+  z-index: 100;
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto;
-  padding: 0 20px;
+}
+
+nav h1 {
+  font-size: 24px;
+  color: #ffffff; /* Dark gray */
+  margin: 0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  margin-left: auto; /* Push the UL to the right */
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #ffffff; /* Dark gray text */
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #333; /* Change to black on hover */
+}
+
+.login-signup {
+  background-color: #f0ad4e; /* White background for login/signup */
+  border: 2px solid #333; /* Dark gray border */
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.login-signup:hover {
+  color: #000000; /* White text on hover */
 }
 
 /* Logo styling */
@@ -40,41 +83,12 @@ header {
   color: white;
 }
 
-/* Navbar link styling */
-nav {
-  display: flex;
-  align-items: center;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  padding: 10px 20px;
-  background-color: #555;
-  border-radius: 5px;
-}
-
 .container {
-  background-color: #14213D;
+  background-color: #208AAE;
   background-size: cover;
   background-position: center;
   display: flex;
   flex-direction: column;
-}
-
-
-
-.login-signup {
-  background-color: #f0ad4e;
-  color: white;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-  font-size: large;
-}
-
-.login-signup:hover {
-  background-color: #000;
 }
 
 * {
@@ -160,6 +174,7 @@ nav a {
   from {
     opacity: 0.4;
   }
+
   to {
     opacity: 1;
   }
@@ -181,7 +196,7 @@ nav a {
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  background-color: #111;
+
   padding: 10px;
   border-radius: 5px;
   border: 2px solid #444;
@@ -189,10 +204,10 @@ nav a {
 }
 
 .card {
-  background-color: #111;
+
   border: 2px solid #444;
   border-radius: 5px;
-  text-align: center;
+  text-align: left;
   padding: 15px;
   margin: 10px;
   width: 250px;
@@ -227,7 +242,7 @@ nav a {
   display: grid;
   grid-template-columns: repeat(5, 7fr);
   gap: 1rem;
-  padding: 1rem; 
+  padding: 1rem;
 }
 
 /* Container styling */
@@ -237,7 +252,7 @@ nav a {
   gap: 20px;
   padding: 20px;
   margin: 0 auto;
-  background-color:#FCA311;
+
   border-radius: 8px;
   border-radius: 5px;
   text-align: center;
@@ -247,7 +262,6 @@ nav a {
 
 /* Card and grid-item styling */
 .grid-item {
-  background-color: #111;
   border: 1px solid #333;
   border-radius: 8px;
   overflow: hidden;
@@ -260,7 +274,7 @@ nav a {
 /* Hover effect for grid items */
 .grid-item:hover {
   transform: scale(1.05);
-  border-color:#00eaff;
+  border-color: #00eaff;
 }
 
 /* Image styling within the grid item */
@@ -306,31 +320,35 @@ nav a {
     gap: 15px;
   }
 
-  .slideshow-container{
+  .slideshow-container {
     max-width: 360px;
-    margin-top: 4em ;
+    margin-top: 4em;
   }
 
-  .card , .grid-item{
-padding: 10px;
+  .card,
+  .grid-item {
+    padding: 10px;
   }
 
-  .Item__price, .Item__link{
+  .Item__price,
+  .Item__link {
     font-size: 12px;
   }
+
   .image {
     width: 100px;
     height: 100px;
-  } 
+  }
 
-  .Item__link 
-  
-    div{
-        align-items: center;
-        justify-content: center; /* Center content horizontally */
-        align-items: center; /* Center content vertically */
-        
-    }
+  .Item__link div {
+    align-items: center;
+    justify-content: center;
+    /* Center content horizontally */
+    align-items: center;
+    /* Center content vertically */
+
+  }
+
   .pass {
     grid-column: span 1;
     width: 100%;
@@ -385,76 +403,22 @@ padding: 10px;
   font-size: 14px;
   color: #000000;
 }
+
 .right-content {
   flex: 2;
   background-color: #ffffff;
   padding: 20px;
   border-radius: 10px;
 }
+
 /* Section Titles */
 .section h3 {
-font-size: 20px;
-margin-bottom: 10px;
-margin-right: 10em;
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-right: 10em;
 }
 
-/* Center the login form container */
-.login-form-container {
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 40px;
-  border-radius: 8px;
-  max-width: 400px;
-  margin: 80px auto;
-  color: #fff;
-  text-align: center;
-}
 
-/* Heading */
-.login-form-container h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-/* Input fields */
-.login-form input[type="email"],
-.login-form input[type="password"] {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0 20px;
-  border: 1px solid #555;
-  border-radius: 4px;
-  background-color: #222;
-  color: #fff;
-}
-
-.login-signup {
-  background-color: #f0ad4e;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: large;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.login-signup:hover {
-  background-color: #ffa726;
-}
-
-.login-signup {
-  display: inline-block;
-  text-decoration: none;
-  font-size: 14px;
-  transition: color 0.3s ease;
-}
-
-.login-signup:hover {
-  color: #000;
-}
-
-.login-button:focus,
-.login-signup:focus,
 .next:focus,
 .prev:focus {
   outline: 2px solid #f0ad4e;
@@ -464,23 +428,6 @@ margin-right: 10em;
 .dot,
 .login-button {
   transition: all 0.3s ease;
-}
-
-.login-signup-page{
-  display: inline-block;
-  text-decoration: none;
-  font-size: 14px;
-  transition: color 0.3s ease;
-  margin-top: 10px;
-  width: 100%;
-  padding: 12px;
-  background-color: #f0ad4e;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .tag {
@@ -494,6 +441,7 @@ margin-right: 10em;
   padding-right: 8px;
   text-align: center;
 }
+
 .display-topleft {
   position: absolute;
   left: 0;
@@ -501,7 +449,7 @@ margin-right: 10em;
 }
 
 footer {
-  background-color: #666666;
+  background-color: #000000;
   color: #fff;
   text-align: center;
   padding: 20px 0;

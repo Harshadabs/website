@@ -1,122 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArconHUB</title>
-    <link rel="stylesheet" href="static\css\game page.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArconHUB</title>
+  <link rel="stylesheet" href="static\css\game page.css">
 </head>
+
 <body>
-  
-  <div class="nav-container ">
     <header>
-      <div class="logo">ArconHUB</div>
       <nav>
-          <a href='/'>HOME</a>
+        <h1>Arcon HUB</h1>
+        <ul>
+          <li><a href='/'>Home</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+          {% if current_user.is_authenticated %}
+          <li><a href="{{ url_for('logout') }}" class="login-signup">Hi, {{ current_user.username }}</a></li>
+          {% else %}
+          <li><a href="/login" class="login-signup">LOGIN / SIGNUP</a></li>
+          {% endif %}
+        </ul>
       </nav>
-      <nav>
-        {% if current_user.is_authenticated %}
-        <li><a href="{{ url_for('logout') }}" class="login-signup">Hi, {{ current_user.username }}</a></li>
-    {% else %}
-    <a href="/login" class="login-signup">LOGIN / SIGNUP</a>
-{% endif %}
-    </nav>  
-  </header>
-  </div>
-  
-<div class="container ">
+    </header>
+
+  <div class="container ">
 
     <div class="section container ">
       <h1 style="color: white;text-align: center;">LOGIN AND SERVER ID RECHARGE</h1>
-          <h3>1.) Input Data Game</h3>
-          <div class="input-row" >
-            <input type="number" placeholder="Input User ID" class="input-box">
-            <input type="number" placeholder="Input Server ID" class="input-box">
-                <div class="sidebar " style="margin-right:10em ;">
-        <img src="static/images/mobile legends.png" alt="Mobile Legends" width="200px" class="game-image">
-        <div class="instructions">
+      <h3>1.) Input Data Game</h3>
+      <div class="input-row">
+        <input type="number" placeholder="Input User ID" class="input-box">
+        <input type="number" placeholder="Input Server ID" class="input-box">
+        <div class="sidebar " style="margin-right:10em ;">
+          <img src="static/images/mobile legends.png" alt="Mobile Legends" width="200px" class="game-image">
+          <div class="instructions">
             <h3>How to Top Up the cheapest Mobile Legends Diamonds:</h3>
             <ol>
-                <li>Enter ID & Server</li>
-                <li>Select Item</li>
-                <li>Select Payment</li>
-                <li>Click Confirm Top Up & make Payment</li>
-                <li>diamonds will automatically be recharged into the game account</li>
+              <li>Enter ID & Server</li>
+              <li>Select Item</li>
+              <li>Select Payment</li>
+              <li>Click Confirm Top Up & make Payment</li>
+              <li>diamonds will automatically be recharged into the game account</li>
             </ol>
+          </div>
         </div>
+      </div>
+      <p class="instruction">
+        Please enter your User ID & Server and make sure it is correct. Example: 123456789|server-asia.
+      </p>
+      <h3>2.) Select Service Amount</h3>
+      <div class="Items grid-container">
+
+        {% for package in packages %}
+        <button class="box grid-item" onclick="selectItem('{{ package.title }}')">
+          <a href="#" class="Item__link">
+            <div class="product-container" style="display: block;">
+              <img src="static/images/dimond.png" alt="#" class="Image">
+              <span class="Item__title">{{ package.title }}</span>
+            </div>
+            <span class="Item__price">{{ package.price }}</span>
+          </a>
+        </button>
+        {% endfor %}
+        <button class="box grid-item pass">
+          <a href="#" class="Item__link">
+            <div class="product-container" style="display: block;">
+              <span class="Item__title"> Weekly Diamond pass </span>
+            </div>
+            <span class="Item__price">₹ 140</span>
+
+          </a>
+        </button>
+
+        <button class="box grid-item pass">
+          <a href="#" class="Item__link">
+            <div class="product-container" style="display: block;">
+              <span class="Item__title"> Starlight pass</span>
+            </div>
+            <span class="Item__price">₹ 270</span>
+
+          </a>
+        </button>
+
+        <button class="box grid-item pass ">
+          <a href="#" class="Item__link">
+            <div class="product-container" style="display: block;">
+              <span class="Item__title"> Twilight pass</span>
+            </div>
+            <span class="Item__price color_change">₹ 750</span>
+
+          </a>
+        </button>
+
+      </div>
     </div>
-        </div>
-          <p class="instruction">
-            Please enter your User ID & Server and make sure it is correct. Example: 123456789|server-asia.
-          </p>
-          <h3>2.) Select Service Amount</h3>
-          <div class="Items grid-container">
-            
-            {% for package in packages %}
-                <button class="box grid-item" onclick="selectItem('{{ package.title }}')">
-                    <a href="#" class="Item__link">
-                        <div class="product-container" style="display: block;">
-                            <img src="static/images/dimond.png" alt="#" class="Image">
-                            <span class="Item__title">{{ package.title }}</span>
-                        </div>
-                        <span class="Item__price">{{ package.price }}</span>
-                    </a>
-                </button>
-                {% endfor %}
-            <button class="box grid-item pass">
-              <a href="#" class="Item__link">
-                <div class="product-container" style="display: block;">
-                <span class="Item__title"> Weekly Diamond pass </span>
-              </div>
-                <span class="Item__price">₹ 140</span>
-              
-              </a>
-            </button>
-
-            <button class="box grid-item pass">
-              <a href="#" class="Item__link">
-                <div class="product-container" style="display: block;">
-                <span class="Item__title"> Starlight pass</span>
-              </div>
-              <span class="Item__price">₹ 270</span>
-              
-              </a>
-            </button>
-
-            <button class="box grid-item pass ">
-              <a href="#" class="Item__link">
-                <div class="product-container" style="display: block;">
-                <span class="Item__title"> Twilight pass</span>
-              </div>
-              <span class="Item__price color_change">₹ 750</span>
-              
-              </a>
-            </button>
-          
-          </div> 
-    </div>   
 
     <footer>
       <div class="footer-container">
-          <p>&copy; 2024 ArconHUB. All Rights Reserved.</p>
-          <ul>
-              <li><a href="https://www.instagram.com/arcon_store/">About Us</a></li>
-              <li><a href="https://wa.link/agt1r4">Contact</a></li>
-          </ul>
+        <p>&copy; 2024 ArconHUB. All Rights Reserved.</p>
+        <ul>
+          <li><a href="https://www.instagram.com/arcon_store/">About Us</a></li>
+          <li><a href="https://wa.link/agt1r4">Contact</a></li>
+        </ul>
       </div>
-  </footer> 
- </div>
+    </footer>
+  </div>
 </body>
 <script>
-document.querySelectorAll('.grid-item').forEach(item => {
-    item.addEventListener('click', function() {
-        // Remove active class from all grid items
-        document.querySelectorAll('.grid-item').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.grid-item').forEach(item => {
+    item.addEventListener('click', function () {
+      // Remove active class from all grid items
+      document.querySelectorAll('.grid-item').forEach(el => el.classList.remove('active'));
 
-        // Add active class to the clicked item
-        this.classList.add('active');
+      // Add active class to the clicked item
+      this.classList.add('active');
     });
-});
+  });
 
 </script>
+
 </html>

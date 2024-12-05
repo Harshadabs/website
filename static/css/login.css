@@ -21,63 +21,51 @@ body {
 ::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.7);
 }
-/* Navbar container */
-.nav-container {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: #000000; /* Navbar background color */
-  padding: 10px 0;
+
+header {
+  background-color: #000000; /* Light gray background */
+  padding: 10px 20px;
+  border-bottom: 2px solid #ccc; /* Subtle border for header */
   z-index: 100;
+  position: fixed;
+  width: 100%;
 }
 
-/* Header within the navbar */
-header {
+nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto;
-  padding: 0 20px;
 }
 
-/* Logo styling */
-.logo {
+nav h1 {
   font-size: 24px;
-  font-weight: bold;
-  color: white;
+  color: #ffffff; /* Dark gray */
+  margin: 0;
 }
 
-/* Navbar link styling */
-nav {
+nav ul {
+  list-style: none;
   display: flex;
-  align-items: center;
+  margin: 0;
+  padding: 0;
+  margin-left: auto; /* Push the UL to the right */
 }
 
-nav a {
-  color: white;
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
   text-decoration: none;
-  padding: 10px 20px;
-  background-color: #555;
-  border-radius: 5px;
+  color: #ffffff; /* Dark gray text */
+  font-weight: bold;
+  transition: color 0.3s ease;
 }
 
-/* Sign In button styling */
-.login-signup {
-  background-color: #f0ad4e;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: large;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+nav ul li a:hover {
+  color: #333; /* Change to black on hover */
 }
 
-.login-signup:hover {
-  background-color: #ffa726;
-}
-
-/* Login form container */
 .login-form-container {
   background-color: rgba(255, 255, 255, 0.1);
   padding: 40px;
