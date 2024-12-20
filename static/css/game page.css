@@ -1,124 +1,4 @@
 /* Global Styling */
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: "Montserrat", sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #14213D;
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: #fff;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-header {
-  background-color: #000000; /* Light gray background */
-  padding: 10px 20px;
-  border-bottom: 2px solid #ccc; /* Subtle border for header */
-  z-index: 100;
-  position: fixed;
-  width: 100%;
-  top: 0;
-}
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-nav h1 {
-  font-size: 24px;
-  color: #ffffff; /* Dark gray */
-  margin: 0;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  margin: 0;
-  padding: 0;
-  margin-left: auto; /* Push the UL to the right */
-}
-
-nav ul li {
-  margin: 0 15px;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: #ffffff; /* Dark gray text */
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-nav ul li a:hover {
-  color: #333; /* Change to black on hover */
-}
-
-.login-signup {
-  background-color: #f0ad4e; /* White background for login/signup */
-  border: 2px solid #333; /* Dark gray border */
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-weight: bold;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.login-signup:hover {
-  color: #000000; /* White text on hover */
-}
-/* Container Styling */
-.container {
-  background-color: #14213D;
-  margin-top: 35px;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Login and Signup Button */
-.login-signup {
-  background-color: #f0ad4e;
-  color: white;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-  font-size: large;
-}
-
-.login-signup:hover {
-  background-color: #000;
-}
-
-
-a {
-  text-decoration: none;
-}
-
-/* Grid Container */
-.grid-container-home {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  padding: 20px;
-  margin: 0 auto;
-  background-color: #FCA311;
-  border-radius: 5px;
-}
-
 .grid-item {
   background-color: #111;
   border: 1px solid #333;
@@ -135,13 +15,6 @@ a {
   border-color: #00eaff;
 }
 
-.image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
-}
 
 .grid-item:hover {
   transform: scale(1.03);
@@ -166,7 +39,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(50, 50, 50, 0.7);
+  background-color: rgba(0, 128, 128, 0.8);
   margin: 0.4em;
   border-radius: 5px;
   padding: 5px;
@@ -178,9 +51,6 @@ ol {
   color: white;
 }
 
-.Image {
-  max-width: 1.1em !important;
-}
 
 .input-row {
   display: flex;
@@ -216,60 +86,3 @@ ol {
   }
 }
 
-@media (max-width: 600px) {
-  .grid-container-home {
-    grid-template-columns: 1fr;
-  }
-
-  .Item__price {
-    font-size: 14px;
-  }
-
-  .container {
-    padding: 10px;
-  }
-
-  .login-form-container {
-    margin: 50px auto;
-    padding: 20px;
-  }
-}
-
-footer {
-  background-color: #666666;
-  color: #fff;
-  text-align: center;
-  padding: 20px 0;
-  bottom: 0;
-  width: 100%;
-  margin-top: 20 px;
-}
-
-.footer-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.footer-container ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 10px 0;
-  display: flex;
-  gap: 15px;
-}
-
-.footer-container ul li {
-  display: inline;
-}
-
-.footer-container ul li a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.footer-container ul li a:hover {
-  text-decoration: underline;
-}
