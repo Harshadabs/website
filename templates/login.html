@@ -10,17 +10,18 @@
     <link rel="stylesheet" href="static\css\logins.css">    <!-- Link to your CSS file -->
   </head>
   <body>
-      <header>
-        <nav>
-          <h1>ArconHUB</h1>
-          <ul>
-            <li><a href='/'>Home</a></li>
-            <li><a href="#">Shop</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="#">Contact</a></li>
-          </ul>
-        </nav>
-      </header>
+    <header>
+      <nav>
+        <h1>ArconHUB</h1>
+        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+        <ul class="menu">
+          <li><a href='/' class="navlink">Home</a></li>
+          <li><a href="#" class="navlink">Shop</a></li>
+          <li><a href="/about" class="navlink">About</a></li>
+          <li><a href="#" class="navlink">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
 
     <div class="container">
       <div class="login-form-container">
@@ -42,4 +43,11 @@
       </div>
     </div>
   </body>
+  <script>
+     function toggleMenu() {
+    const menu = document.querySelector('.menu');
+    menu.classList.toggle('open');
+  }
+
+  </script>
 </html>

@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="static/images/arcon.32x32.jpeg">
-  <link rel="stylesheet" href="static\css\styles.css">
+  <link rel="stylesheet" href="static/css/styles.css">
   <link rel="stylesheet" href="static\css\game page.css">
-  <link rel="stylesheet" href="static\css\logins.css">
+  <link rel="stylesheet" href="static\css\login.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
@@ -21,17 +21,17 @@
       <header>
         <nav>
           <h1>ArconHUB</h1>
-          <ul>
-            <li><a href='/'>Home</a></li>
-            <li><a href="#">Shop</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="#">Contact</a></li>
-            {% if current_user.is_authenticated %}
-            <li><a href="{{ url_for('logout') }}" class="login-signup">Hi, {{ current_user.username }}</a></li>
-            {% else %}
-            <li><a href="/login" class="login-signup">LOGIN / SIGNUP</a></li>
-            {% endif %}
+          <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+          <ul class="menu">
+            <li><a href='/' class="navlink">Home</a></li>
+            <li><a href="#" class="navlink">Shop</a></li>
+            <li><a href="/about" class="navlink">About</a></li>
+            <li><a href="#" class="navlink">Contact</a></li>
           </ul>
+          <ul>
+            <li><a href="/login" class="login-signup">LOGIN / SIGNUP</a></li>
+          </ul>
+        
         </nav>
       </header>
     </div>
@@ -74,40 +74,40 @@
     <h2 class="h2game">Games</h2>
     <div class="grid-container-home container">
       <div class="card grid-item-home">
-        <a href='/mobilelegends' class="Item__link">
+        <a href='/mobilelegends' class="Item__link_home">
           <div class="product-container">
             <img src="static/images/mobile legends.png" alt="Mobile Legends" class="image">
           </div>
-            <span class="Item__price">Moba Legends 5V5</span>
+            <span class="Item__price_home">Moba Legends 5V5</span>
         </a>
       
     </div>
 
     <div class="card grid-item-home">
-      <a href='/GenshinImpact' class="Item__link">
+      <a href='/GenshinImpact' class="Item__link_home">
         <div class="product-container">
           <img src="static/images/Genshin_Impact.png" alt="Genshin Impact" class="image">
         </div>
-        <span class="Item__price">Genshin Impact</span>
+        <span class="Item__price_home">Genshin Impact</span>
       </a>
     </div>
 
     <div class="card grid-item-home">
-      <a href='/Honkai' class="Item__link">
+      <a href='/Honkai' class="Item__link_home">
         <div class="product-container">
           <img src="static/images/honkai star rail.avif" alt="Honkai star rail" class="image">
         </div>
-        <span class="Item__price">Honkai Star Rail</span>
+        <span class="Item__price_home">Honkai Star Rail</span>
       </a>
     </div>
 
     <div class="card grid-item-home">
-      <a href="#" class="Item__link">
+      <a href="#" class="Item__link_home">
         <div class="product-container">
           <img src="static/images/clash of clans.jpg" alt="Clash of Clans" class="image">
         </div>
         <span class="tag display-topleft coc ">Coming soon !</span>
-        <span class="Item__price">Clash of Clans</span>
+        <span class="Item__price_home">Clash of Clans</span>
       </a>
     </div>
   </div>
@@ -124,6 +124,12 @@
   </footer>
 </body>
 <script>
+  function toggleMenu() {
+    const menu = document.querySelector('.menu');
+    menu.classList.toggle('open');
+  }
+
+
   let slideIndex = 1;
   showSlides(slideIndex);
 

@@ -12,22 +12,22 @@
 </head>
 
 <body>
-    <header>
-      <nav>
-        <h1>ArconHUB</h1>
-        <ul>
-          <li><a href='/'>Home</a></li>
-          <li><a href="#">Shop</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="#">Contact</a></li>
-          {% if current_user.is_authenticated %}
-          <li><a href="{{ url_for('logout') }}" class="login-signup">Hi, {{ current_user.username }}</a></li>
-          {% else %}
-          <li><a href="/login" class="login-signup">LOGIN / SIGNUP</a></li>
-          {% endif %}
-        </ul>
-      </nav>
-    </header>
+  <header>
+    <nav>
+      <h1>ArconHUB</h1>
+      <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+      <ul class="menu">
+        <li><a href='/' class="navlink">Home</a></li>
+        <li><a href="#" class="navlink">Shop</a></li>
+        <li><a href="/about" class="navlink">About</a></li>
+        <li><a href="#" class="navlink">Contact</a></li>
+      </ul>
+      <ul>
+        <li><a href="/login" class="login-signup">LOGIN / SIGNUP</a></li>
+      </ul>
+    
+    </nav>
+  </header>
 
   <div class="container ">
 
@@ -113,6 +113,11 @@
   </div>
 </body>
 <script>
+   function toggleMenu() {
+    const menu = document.querySelector('.menu');
+    menu.classList.toggle('open');
+  }
+
   document.querySelectorAll('.grid-item').forEach(item => {
     item.addEventListener('click', function () {
       // Remove active class from all grid items

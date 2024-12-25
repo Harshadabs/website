@@ -76,7 +76,7 @@ ol {
 
 /* Mobile Responsive Styling */
 @media (max-width: 1024px) {
-  .grid-container-home {
+  .grid-container {
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
   }
